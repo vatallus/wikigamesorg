@@ -10,6 +10,8 @@ import NextItemList from "../next-item-list";
 import PlayedItemList from "../played-item-list";
 import Loading from "../loading";
 import useAutoMoveSensor from "../../lib/useAutoMoveSensor";
+import ShareCard from "../share/share-card";
+import { submitScore } from "../../lib/leaderboard";
 
 export default function TimeBattle() {
     const [gameState, setGameState] = useState<"loading" | "ready" | "playing" | "gameover">("loading");
@@ -17,6 +19,7 @@ export default function TimeBattle() {
     const [state, setState] = useState<GameState | null>(null);
     const [timeLeft, setTimeLeft] = useState(60);
     const [isDragging, setIsDragging] = useState(false);
+    const [showShareCard, setShowShareCard] = useState(false);
 
     // Load data
     useEffect(() => {
@@ -78,6 +81,11 @@ export default function TimeBattle() {
             }, 1000);
         } else if (timeLeft === 0 && gameState === "playing") {
             setGameState("gameover");
+            // Submit score to leaderboard
+            if (state) {
+                const finalScore = state.played.filter((item) => item.played.correct).length - 1;
+                submitScore("battle", finalScore);
+            }
         }
         return () => {
             if (timer) clearInterval(timer);
@@ -171,12 +179,27 @@ export default function TimeBattle() {
             )}
 
             {gameState === "gameover" && (
-                <div className={styles.overlay}>
-                    <h1 className={styles.gameOverTitle}>TIME UP!</h1>
-                    <div className={styles.finalScore}>FINAL SCORE: {score}</div>
-                    <p>The history books have closed for today.</p>
-                    <button className={styles.primeButton} onClick={startGame}>TRY AGAIN</button>
-                </div>
+                <>
+                    <div className={styles.overlay}>
+                        <h1 className={styles.gameOverTitle}>TIME UP!</h1>
+                        <div className={styles.finalScore}>FINAL SCORE: {score}</div>
+                        <p>The history books have closed for today.</p>
+                        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+                            <button className={styles.primeButton} onClick={startGame}>TRY AGAIN</button>
+                            <button className={styles.primeButton} onClick={() => setShowShareCard(true)}>
+                                SHARE SCORE 🚀
+                            </button>
+                        </div>
+                    </div>
+
+                    {showShareCard && (
+                        <ShareCard
+                            score={score}
+                            gameMode="battle"
+                            onClose={() => setShowShareCard(false)}
+                        />
+                    )}
+                </>
             )}
         </div>
     );

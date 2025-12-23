@@ -110,6 +110,11 @@
             border-color: #4ecca3;
             background: rgba(255, 255, 255, 0.1);
         }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 
     button {
@@ -122,13 +127,55 @@
         cursor: pointer;
         transition: transform 0.2s;
 
-        &:hover {
+        &:hover:not(:disabled) {
             transform: scale(1.05);
         }
 
-        &:active {
+        &:active:not(:disabled) {
             transform: scale(0.95);
         }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    .clearBtn {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+.shareBtn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    opacity: 0;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+}
+
+.bubble {
+    position: relative;
+
+    &:hover .shareBtn {
+        opacity: 1;
     }
 }
 

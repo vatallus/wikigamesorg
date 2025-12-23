@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { animated, useSpring } from "react-spring";
 import styles from "../styles/game-over.module.scss";
 import Button from "./button";
 import Score from "./score";
+import ShareCard from "./share/share-card";
+import { submitScore } from "../lib/leaderboard";
 
 interface Props {
   highscore: number;
   resetGame: () => void;
   score: number;
 }
-
-const defaultShareText = "Share";
 
 function getMedal(score: number): string {
   if (score >= 20) {
@@ -25,6 +25,7 @@ function getMedal(score: number): string {
 
 export default function GameOver(props: Props) {
   const { highscore, resetGame, score } = props;
+  const [showShareCard, setShowShareCard] = useState(false);
 
   const animProps = useSpring({
     opacity: 1,
@@ -32,34 +33,35 @@ export default function GameOver(props: Props) {
     config: { duration: 500 },
   });
 
-  const [shareText, setShareText] = React.useState(defaultShareText);
-
-  const share = React.useCallback(async () => {
-    await navigator?.clipboard?.writeText(
-      `🏛️ wikitrivia.tomjwatson.com\n\n${getMedal(
-        score
-      )}Streak: ${score}\n${getMedal(highscore)}Best Streak: ${highscore}`
-    );
-    setShareText("Copied");
-    setTimeout(() => {
-      setShareText(defaultShareText);
-    }, 2000);
-  }, [highscore, score]);
+  // Submit score to leaderboard on mount
+  useEffect(() => {
+    submitScore("trivia", score);
+  }, [score]);
 
   return (
-    <animated.div style={animProps} className={styles.gameOver}>
-      <div className={styles.scoresWrapper}>
-        <div className={styles.score}>
-          <Score score={score} title="Streak" />
+    <>
+      <animated.div style={animProps} className={styles.gameOver}>
+        <div className={styles.scoresWrapper}>
+          <div className={styles.score}>
+            <Score score={score} title="Streak" />
+          </div>
+          <div className={styles.score}>
+            <Score score={highscore} title="Best streak" />
+          </div>
         </div>
-        <div className={styles.score}>
-          <Score score={highscore} title="Best streak" />
+        <div className={styles.buttons}>
+          <Button onClick={resetGame} text="Play again" />
+          <Button onClick={() => setShowShareCard(true)} text="Share Score 🚀" minimal />
         </div>
-      </div>
-      <div className={styles.buttons}>
-        <Button onClick={resetGame} text="Play again" />
-        <Button onClick={share} text={shareText} minimal />
-      </div>
-    </animated.div>
+      </animated.div>
+
+      {showShareCard && (
+        <ShareCard
+          score={score}
+          gameMode="trivia"
+          onClose={() => setShowShareCard(false)}
+        />
+      )}
+    </>
   );
 }

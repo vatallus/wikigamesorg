@@ -1,0 +1,212 @@
+@import "../styles/variables";
+
+.leaderboardContainer {
+    width: 100%;
+    max-width: 900px;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    border-radius: 30px;
+    padding: 40px;
+    color: white;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.1rem;
+    }
+}
+
+.filters {
+    margin-bottom: 30px;
+}
+
+.gameModes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        &.active {
+            background: #4ade80;
+            color: #000;
+            border-color: #4ade80;
+        }
+    }
+}
+
+.userCard {
+    background: rgba(74, 222, 128, 0.2);
+    border: 2px solid #4ade80;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.rank {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #4ade80;
+    min-width: 80px;
+    text-align: center;
+}
+
+.details {
+    flex: 1;
+}
+
+.username {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.editBtn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+}
+
+.editName {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    input {
+        flex: 1;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 10px 15px;
+        color: white;
+        font-size: 1.2rem;
+        outline: none;
+
+        &:focus {
+            border-color: #4ade80;
+        }
+    }
+
+    button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.2s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+.score {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.table {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.tableHeader {
+    display: grid;
+    grid-template-columns: 100px 1fr 120px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 100px 1fr 120px;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    &.highlight {
+        background: rgba(74, 222, 128, 0.1);
+        border-left: 4px solid #4ade80;
+    }
+}
+
+.rankCell {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nameCell {
+    font-size: 1.1rem;
+}
+
+.scoreCell {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+.empty {
+    padding: 60px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+}

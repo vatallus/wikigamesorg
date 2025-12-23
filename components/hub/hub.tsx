@@ -54,6 +54,13 @@ export default function Hub({ onSelectGame }: { onSelectGame: (game: string) => 
                     tag="PREMIUM"
                     onClick={() => onSelectGame("battle")}
                 />
+                <GameCard
+                    title="Leaderboard"
+                    description="Compete globally! See where you rank among history masters."
+                    icon="🏆"
+                    tag="NEW"
+                    onClick={() => onSelectGame("leaderboard")}
+                />
             </div>
 
             <div className={styles.factBox}>

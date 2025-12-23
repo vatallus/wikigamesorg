@@ -7,9 +7,10 @@ const Hub = dynamic(() => import("../components/hub/hub"), { ssr: false });
 const Oracle = dynamic(() => import("../components/oracle/oracle"), { ssr: false });
 const Gallery = dynamic(() => import("../components/gallery/gallery"), { ssr: false });
 const Battle = dynamic(() => import("../components/battle/battle"), { ssr: false });
+const Leaderboard = dynamic(() => import("../components/leaderboard/leaderboard"), { ssr: false });
 
 export default function Index() {
-  const [activeView, setActiveView] = React.useState<"hub" | "trivia" | "oracle" | "gallery" | "battle">("hub");
+  const [activeView, setActiveView] = React.useState<"hub" | "trivia" | "oracle" | "gallery" | "battle" | "leaderboard">("hub");
 
   const NavButton = () => (
     <button
@@ -133,6 +134,19 @@ export default function Index() {
 
       {activeView === "battle" && (
         <Battle />
+      )}
+
+      {activeView === "leaderboard" && (
+        <div style={{
+          minHeight: "100vh",
+          background: "radial-gradient(circle at top, #1e293b 0%, #0f172a 100%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "40px 20px"
+        }}>
+          <Leaderboard />
+        </div>
       )}
     </>
   );
