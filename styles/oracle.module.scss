@@ -1,0 +1,158 @@
+@import "./variables";
+
+.oracleContainer {
+    width: 100%;
+    max-width: 800px;
+    height: 70vh;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.chatWindow {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+    }
+}
+
+.message {
+    display: flex;
+    width: 100%;
+
+    &.user {
+        justify-content: flex-end;
+
+        .bubble {
+            background: #4ecca3;
+            color: #000;
+            border-bottom-right-radius: 4px;
+        }
+    }
+
+    &.oracle {
+        justify-content: flex-start;
+
+        .bubble {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    .bubble {
+        max-width: 80%;
+        padding: 16px 24px;
+        border-radius: 20px;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        animation: slideUp 0.3s ease-out;
+    }
+}
+
+.typing {
+    display: flex;
+    gap: 4px;
+    padding: 10px;
+
+    span {
+        width: 8px;
+        height: 8px;
+        background: #4ecca3;
+        border-radius: 50%;
+        animation: bounce 1.4s infinite;
+
+        &:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    }
+}
+
+.inputArea {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 15px;
+
+    input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 100px;
+        padding: 15px 25px;
+        color: white;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s;
+
+        &:focus {
+            border-color: #4ecca3;
+            background: rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    button {
+        background: #4ecca3;
+        color: #000;
+        border: none;
+        border-radius: 100px;
+        padding: 0 30px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}

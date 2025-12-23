@@ -1,0 +1,234 @@
+@import "./variables";
+
+.galleryContainer {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        letter-spacing: 5px;
+        margin-bottom: 10px;
+        background: linear-gradient(to bottom, #fff, #94a3b8);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    p {
+        color: #64748b;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.pioneerCard {
+    background: #1e293b;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    &:hover {
+        transform: scale(1.02) translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border-color: #4ecca3;
+
+        .imageWrapper img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            opacity: 1;
+        }
+    }
+
+    .imageWrapper {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+
+            span {
+                font-size: 1.5rem;
+                font-weight: 900;
+                border: 2px solid white;
+                padding: 5px 15px;
+            }
+        }
+    }
+
+    .info {
+        padding: 24px;
+
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.modalContent {
+    background: #1e293b;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        font-size: 2rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    img {
+        width: 50%;
+        object-fit: cover;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            height: 300px;
+        }
+    }
+
+    .modalData {
+        padding: 40px;
+        width: 50%;
+
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .yearHighlight {
+            display: inline-block;
+            background: #4ecca3;
+            color: black;
+            font-weight: 900;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .wikiLink {
+            color: #4ecca3;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #4ecca3;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.2s;
+
+            &:hover {
+                background: #4ecca3;
+                color: black;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

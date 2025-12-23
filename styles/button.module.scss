@@ -11,7 +11,7 @@
   font-weight: 700;
   font-style: italic;
   white-space: nowrap;
-  width: 140px;
+  min-width: 140px;
 
   &:hover {
     filter: brightness(1.3);
