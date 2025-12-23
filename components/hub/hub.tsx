@@ -58,7 +58,7 @@ export default function Hub({ onSelectGame }: { onSelectGame: (game: string) => 
 
             <div className={styles.factBox}>
                 <span className={styles.factLabel}>⚡ FACT OF THE DAY</span>
-                <p>"The Great Pyramid of Giza was the tallest man-made structure in the world for over 3,800 years."</p>
+                <p>&quot;The Great Pyramid of Giza was the tallest man-made structure in the world for over 3,800 years.&quot;</p>
             </div>
 
             <footer className={styles.footer}>

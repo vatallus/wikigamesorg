@@ -71,7 +71,7 @@ export default function TimeBattle() {
 
     // Timer logic
     useEffect(() => {
-        let timer: any;
+        let timer: ReturnType<typeof setInterval> | undefined;
         if (gameState === "playing" && timeLeft > 0) {
             timer = setInterval(() => {
                 setTimeLeft((t) => Math.max(0, t - 1));
@@ -79,7 +79,9 @@ export default function TimeBattle() {
         } else if (timeLeft === 0 && gameState === "playing") {
             setGameState("gameover");
         }
-        return () => clearInterval(timer);
+        return () => {
+            if (timer) clearInterval(timer);
+        };
     }, [gameState, timeLeft]);
 
     const onDragStart = () => setIsDragging(true);

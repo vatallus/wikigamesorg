@@ -97,7 +97,7 @@ export default function Index() {
       </Head>
 
       {activeView === "hub" && (
-        <Hub onSelectGame={(game: string) => setActiveView(game as any)} />
+        <Hub onSelectGame={(game: string) => setActiveView(game as typeof activeView)} />
       )}
 
       {activeView !== "hub" && <NavButton />}

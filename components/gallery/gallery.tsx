@@ -11,8 +11,16 @@ const FEATURED_ITEMS = [
     { id: "Q6", label: "Eiffel Tower", year: 1887, description: "A wrought-iron lattice tower on the Champ de Mars in Paris, France.", image: "https://upload.wikimedia.org/wikipedia/commons/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg" },
 ];
 
+interface GalleryItem {
+    id: string;
+    label: string;
+    year: number;
+    description: string;
+    image: string;
+}
+
 export default function Gallery() {
-    const [selectedItem, setSelectedItem] = useState<any>(null);
+    const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
     return (
         <div className={styles.galleryContainer}>
